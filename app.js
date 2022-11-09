@@ -9,10 +9,10 @@ const port = process.env.PORT
 // views
 app.engine('handlebars', exphbs.engine({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
-app.set('views', './views');
+
 
 app.get('/', (req, res) => {
-  res.send('aaaaaaaa');
+  res.render('index');
 });
 
 // 靜態檔案
