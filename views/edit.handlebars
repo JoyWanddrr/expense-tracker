@@ -1,0 +1,43 @@
+<div class="container ">
+  <div class="container-item d-flex flex-column  align-items-center ">
+    <form action="" method="POST" style="margin:20px ;">
+      <div class="m-2 d-flex justify-content-start align-items-center ">
+        {{!-- <p class="m-4" style="font-size:1px;">*必填欄位</p>
+        <p class="m-4">請輸入你的支出</p> --}}
+        <h6 class="me-2" style="font-size:1px;">*必填欄位</h6>
+        <h5 class="ms-4">請修改你的支出</h4>
+      </div>
+      <div class="m-2">
+        <label for="name" style="letter-spacing:1px;margin-right: 20px;">名稱*:</label>
+        <input type="text" style="margin: 20px;" class="w-50 ms-4" name="name" id="name" placeholder="不要亂花錢" value=""
+          required>
+      </div>
+      <div class="m-2">
+        <label for="date" style="letter-spacing:1px;margin-right: 20px;">日期*:</label>
+        <input type="date" class="w-50 ms-4" style="margin: 20px;" name="date" id="date" placeholder=""
+          value="2022-11-10" required>
+      </div>
+      <div class="m-2">
+        <label for="category" style="letter-spacing:1px;margin-right: 20px;">類別*:</label>
+        <select class="drop-down-menu w-50 ms-4" style="margin: 20px;">
+          <option>Select</option>
+          <option>食</option>
+          <option>衣</option>
+          <option>住</option>
+          <option>行</option>
+          <option>樂</option>
+          <option>其他</option>
+        </select>
+      </div>
+      <div class="m-2">
+        <label for="amount" style="letter-spacing:1px;margin-right: 20px;">金額*:</label>
+        <input type="number" class="w-50 ms-4" style="margin: 20px;" name="amount" id="amount"
+          placeholder="Enter amount" min="0" value="" required>
+      </div>
+      <div class="m-2">
+        <button class="btn btn-outline-dark w-50 text-align-center" style="margin-left:90px;height:30px;"
+          type="submit">送出</button>
+      </div>
+    </form>
+  </div>
+</div>
