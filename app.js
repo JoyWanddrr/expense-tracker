@@ -12,7 +12,7 @@ app.set('view engine', 'handlebars');
 
 
 app.get('/', (req, res) => {
-  res.render('edit');
+  res.render('login');
 });
 
 // 靜態檔案
