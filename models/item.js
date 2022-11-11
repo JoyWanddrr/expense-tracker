@@ -6,7 +6,7 @@ const itemSchema = new mongoose.Schema({
   date: { type: String, require: true },
   amount: { type: Number, require: true },
   icon: { type: String, require: true },
-  userId: { type: Schema.Types.ObjectId, ref: 'User', index: true, required: true }
+  // userId: { type: Schema.Types.ObjectId, ref: 'User', index: true, required: true }
 })
 
 module.exports = mongoose.model('Item', itemSchema)
