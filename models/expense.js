@@ -6,8 +6,8 @@ const expenseSchema = new mongoose.Schema({
   date: { type: String, require: true },
   amount: { type: Number, require: true },
   icon: { type: String, require: true },
-  createdAt: { type: Date, default: Date.now }
-  // userId: { type: Schema.Types.ObjectId, ref: 'User', index: true, required: true }
+  createdAt: { type: Date, default: Date.now },
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', index: true, required: true }
 })
 
 module.exports = mongoose.model('Expense', expenseSchema)

@@ -8,10 +8,10 @@ const session = require('express-session')
 const usePassport = require('./config/passport')
 
 const methodOverride = require('method-override')
-
+const flash = require('connect-flash')
 const port = process.env.PORT
 const routes = require('./routes')
-const { use } = require('./routes')
+
 // require
 require('./config/mongoose')
 
@@ -37,9 +37,12 @@ app.use(session({
 app.use(express.urlencoded({ extended: true }))// post、put會用到，跟資料庫請求、寫入所需要的解析。
 app.use(methodOverride('_method'))
 usePassport(app)
+app.use(flash())
 app.use((req, res, next) => {
   res.locals.isAuthenticated = req.isAuthenticated()
   res.locals.user = req.user
+  res.locals.success_msg = req.flash('success_msg')
+  res.locals.warning_msg = req.flash('warning_msg')
   next()
 })
 app.use(routes)

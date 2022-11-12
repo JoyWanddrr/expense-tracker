@@ -4,14 +4,13 @@ const Expense = require('../../models/expense')
 
 // 首頁
 router.get('/', (req, res) => {
-
-  Expense.find()
+  const userId = req.user._id
+  Expense.find({ userId })
     .lean()
-    .then((expenses) => {
+    .then(expenses => {
       // 計算總花費
       let totalAmount = 0
-      expenses.forEach(cost => { return totalAmount += cost.amount }
-      )
+      expenses.forEach(cost => { return totalAmount += cost.amount })
       res.render('index', { expenses, totalAmount })
     })
     .catch(err => console.log(err))
@@ -20,9 +19,12 @@ router.get('/', (req, res) => {
 // sort
 router.get('/sort', (req, res) => {
   const cateSort = req.query.sort
-  Expense.find({})
+  const userId = req.user._id
+  const _id = req.params.id
+  Expense.findById()
     .lean()
     .then(cate => {
+      console.log(cate)
       const filterCategory = cate.filter((data) => {
         return data.category.includes(cateSort)
       })
