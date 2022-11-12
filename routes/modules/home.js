@@ -8,7 +8,11 @@ router.get('/', (req, res) => {
   Expense.find()
     .lean()
     .then((expenses) => {
-      res.render('index', { expenses })
+      // 計算總花費
+      let totalAmount = 0
+      expenses.forEach(cost => { return totalAmount += cost.amount }
+      )
+      res.render('index', { expenses, totalAmount })
     })
     .catch(err => console.log(err))
 })
@@ -24,10 +28,12 @@ router.get('/sort', (req, res) => {
       })
       if (filterCategory.length === 0) {
         res.redirect('/')
-        //新增錯誤訊息，表示沒找到
+        //新增錯誤訊息，表示沒找到"此類別沒有花費"
       }
-      res.render('index', { expenses: filterCategory, cateSort })
-
+      let totalAmount = 0
+      filterCategory.forEach(cost => { return totalAmount += cost.amount }
+      )
+      res.render('index', { expenses: filterCategory, cateSort, totalAmount })
     })
     .catch(err => console.log(err))
 
