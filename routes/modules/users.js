@@ -32,7 +32,7 @@ router.post('/register', (req, res) => {
     .then(user => {
       if (user) {
         // 放入錯誤提示
-        errors.push({ message: 'email has been registered!' })
+        // errors.push({ message: 'email has been registered!' })
         return res.render('register', { name, email, password })
       }
       return bcrypt
