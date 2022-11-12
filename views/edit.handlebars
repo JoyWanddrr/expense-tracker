@@ -1,6 +1,6 @@
 <div class="container ">
   <div class="container-item d-flex flex-column  align-items-center ">
-    <form action="" method="POST" style="margin:20px ;">
+    <form action="/expenses/{{expense._id}}?_method=PUT" method="POST" style="margin:20px ;">
       <div class="m-2 d-flex justify-content-start align-items-center ">
         {{!-- <p class="m-4" style="font-size:1px;">*必填欄位</p>
         <p class="m-4">請輸入你的支出</p> --}}
@@ -9,17 +9,17 @@
       </div>
       <div class="m-2">
         <label for="name" style="letter-spacing:1px;margin-right: 20px;">名稱*:</label>
-        <input type="text" style="margin: 20px;" class="w-50 ms-4" name="name" id="name" placeholder="不要亂花錢" value=""
-          required>
+        <input type="text" style="margin: 20px;" class="w-50 ms-4" name="name" id="name" placeholder="不要亂花錢"
+          value="{{expense.name}}" required>
       </div>
       <div class="m-2">
         <label for="date" style="letter-spacing:1px;margin-right: 20px;">日期*:</label>
-        <input type="date" class="w-50 ms-4" style="margin: 20px;" name="date" id="date" placeholder=""
-          value="2022-11-10" required>
+        <input type="date" class="w-50 ms-4" style="margin: 20px;" name="date" id="date" value="{{expense.date}}"
+          required>
       </div>
       <div class="m-2">
         <label for="category" style="letter-spacing:1px;margin-right: 20px;">類別*:</label>
-        <select class="drop-down-menu w-50 ms-4" style="margin: 20px;">
+        <select class="drop-down-menu w-50 ms-4" style="margin: 20px;" required>
           <option>Select</option>
           <option>食</option>
           <option>衣</option>
@@ -32,7 +32,7 @@
       <div class="m-2">
         <label for="amount" style="letter-spacing:1px;margin-right: 20px;">金額*:</label>
         <input type="number" class="w-50 ms-4" style="margin: 20px;" name="amount" id="amount"
-          placeholder="Enter amount" min="0" value="" required>
+          placeholder="Enter amount" min="0" value="{{expense.amount}}" required>
       </div>
       <div class="m-2">
         <button class="btn btn-outline-dark w-50 text-align-center" style="margin-left:90px;height:30px;"

@@ -4,6 +4,8 @@ if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
 const app = express()
+const methodOverride = require('method-override')
+
 const port = process.env.PORT
 const routes = require('./routes')
 // require
@@ -24,6 +26,8 @@ app.set('view engine', 'handlebars');
 
 // app.use，middleware
 app.use(express.urlencoded({ extended: true }))// post、put會用到，跟資料庫請求、寫入所需要的解析。
+app.use(methodOverride('_method'))
+
 app.use(routes)
 
 

@@ -18,8 +18,32 @@ router.post('/', (req, res) => {
 })
 
 // 修改
+router.get('/:id/edit', (req, res) => {
+  const id = req.params.id
+  return Expense.findById(id)
+    .lean()
+    .then(expense => res.render('edit', { expense })
+    )
+    .catch(err => console.log(err))
+})
+
+router.put('/:id', (req, res) => {
+  const id = req.params.id
+  const newExpense = req.body
+  return Expense.findByIdAndUpdate(id, newExpense)
+    .then(() => { return res.redirect('/') })//icon消失，待修
+    .catch(err => console.log(err))
+})
 
 // 刪除
+router.delete('/:id', (req, res) => {
+  const id = req.params.id
+  console.log(id)
+  return Expense.findById(id)
+    .then(data => data.remove())
+    .then(() => res.redirect('/'))
+    .catch(err => console.log(err))
+})
 
 module.exports = router
 
