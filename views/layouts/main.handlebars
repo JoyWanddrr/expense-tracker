@@ -19,8 +19,13 @@
           aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
+        {{#if isAuthenticated}}
+        <a href="/users/logout" class="btn me-4"
+          style="background-color:white;color:orange;border:1px solid black;">Logout</a>
+        {{else}}
         <a href="/users/login" class="btn me-4"
           style="background-color:white;color:orange;border:1px solid black;">Login</a>
+        {{/if}}
       </div>
       </div>
     </nav>

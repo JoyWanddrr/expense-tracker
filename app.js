@@ -37,6 +37,11 @@ app.use(session({
 app.use(express.urlencoded({ extended: true }))// post、put會用到，跟資料庫請求、寫入所需要的解析。
 app.use(methodOverride('_method'))
 usePassport(app)
+app.use((req, res, next) => {
+  res.locals.isAuthenticated = req.isAuthenticated()
+  res.locals.user = req.user
+  next()
+})
 app.use(routes)
 
 
