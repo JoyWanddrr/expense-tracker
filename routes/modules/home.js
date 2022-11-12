@@ -29,6 +29,7 @@ router.get('/sort', (req, res) => {
         return data.category.includes(cateSort)
       })
       if (filterCategory.length === 0) {
+        req.flash('warning_msg', '此類別沒有花費')
         res.redirect('/')
         //新增錯誤訊息，表示沒找到"此類別沒有花費"
       }

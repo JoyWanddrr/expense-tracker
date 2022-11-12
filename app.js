@@ -30,7 +30,7 @@ app.set('view engine', 'handlebars');
 
 // app.use，middleware
 app.use(session({
-  secret: 'ExpenseSecret',
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true
 }))
