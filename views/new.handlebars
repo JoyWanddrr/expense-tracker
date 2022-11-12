@@ -1,9 +1,7 @@
 <div class="container ">
   <div class="container-item d-flex flex-column  align-items-center ">
-    <form action="" method="POST" style="margin:20px ;">
+    <form action="/expenses" method="POST" style="margin:20px ;">
       <div class="m-2 d-flex justify-content-start align-items-center ">
-        {{!-- <p class="m-4" style="font-size:1px;">*必填欄位</p>
-        <p class="m-4">請輸入你的支出</p> --}}
         <h6 class="me-2" style="font-size:1px;">*必填欄位</h6>
         <h5 class="ms-4">請輸入你的支出</h4>
       </div>
@@ -19,7 +17,7 @@
       </div>
       <div class="m-2">
         <label for="category" style="letter-spacing:1px;margin-right: 20px;">類別*:</label>
-        <select class="drop-down-menu w-50 ms-4" style="margin: 20px;">
+        <select class="drop-down-menu w-50 ms-4" name="category" style="margin: 20px;" required>
           <option>Select</option>
           <option>食</option>
           <option>衣</option>

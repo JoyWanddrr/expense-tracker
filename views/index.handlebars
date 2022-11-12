@@ -2,15 +2,21 @@
   <div class="container-items">
     {{!-- 類別下拉式選單 --}}
     <div class="d-flex flex-column  align-items-center">
-      <select class="drop-down-menu" style="width: 30%;margin-top:20px;">
-        <option>類別</option>
-        <option>食</option>
-        <option>衣</option>
-        <option>住</option>
-        <option>行</option>
-        <option>樂</option>
-        <option>其他</option>
-      </select>
+      <div class="d-flex flex-column  align-items-center">
+        {{!-- 新增name=sort為排序做準備。新增onchange event(函式selected()) --}}
+        <form action="/sort">
+          <select class="form-control" name="sort" id="sort" onchange="this.form.submit()"
+            style="margin-top:20px;width:250px">
+            <option>類別</option>
+            <option value="食">食</option>
+            <option value="衣">衣</option>
+            <option value="住">住</option>
+            <option value="行">行</option>
+            <option value="樂">樂</option>
+            <option value="其他">其他</option>
+          </select>
+        </form>
+      </div>
       {{!-- 總金額 --}}
       <div class="totalAmount d-flex justify-content-between">
         <p class="m-4 p-1">總金額:</p>
@@ -20,21 +26,24 @@
     {{!-- 細項，包含刪除修改 --}}
     <div class="list">
       <ul class="list-group">
+        {{!-- white --}}
+        {{#each expenses}}
         <li class="list-group-item d-flex justify-content-between align-items-center">
           <div class="d-flex align-items-center">
-            <i class="fa-solid fa-utensils m-2" style="font-size: 60px;color:cornflowerblue;"></i>
+            {{!-- fa-solid fa-utensils m-2 --}}
+            <i class="{{getIcon this.category}}" style="font-size: 60px;color:cornflowerblue;"></i>
             <div>
-              <h4>simple default list group item</h4>
-              <font size="1">2022/09/09</font>
+              <h4>{{this.name}}</h4>
+              <font size="1">{{this.date}}</font>
             </div>
           </div>
-          <p class="">$410</p>
+          <p class="">${{this.amount}}</p>
           <div>
             <button type="button" class="btn btn-light">修改</button>
             <button type="button" class="btn btn-dark">刪除</button>
           </div>
         </li>
-
+        {{!-- black --}}
         <li class="list-group-item list-group-item-dark d-flex justify-content-between align-items-center">
           <div class="d-flex align-items-center">
             <i class="fa-solid fa-utensils m-2" style="font-size: 60px;color:cornflowerblue;"></i>
@@ -49,10 +58,11 @@
             <button type="button" class="btn btn-dark">刪除</button>
           </div>
         </li>
+        {{/each}}
       </ul>
       {{!-- 新增支出按鈕 --}}
     </div>
-    <form action="" class="m-4 d-flex justify-content-center">
+    <form action="/expenses/new" class="m-4 d-flex justify-content-center">
       <button class="btn" style="background-color: orange;color:white;border:1px solid black"
         type="submit">新增支出</button>
     </form>

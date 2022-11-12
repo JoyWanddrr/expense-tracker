@@ -9,6 +9,7 @@ router.get('/login', (req, res) => {
 
 router.post('/login', (req, res) => {
   // 將在passport.js裡驗證
+  res.redirect('/')
 })
 
 // register
@@ -18,6 +19,7 @@ router.get('/register', (req, res) => {
 
 router.post('/register', (req, res) => {
   const { name, email, password } = req.body
+  console.log(req.use.id)
   // 放入錯誤提示
   User.findOne({ email })
     .then(user => {
