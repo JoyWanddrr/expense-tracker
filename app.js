@@ -4,10 +4,14 @@ if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
 const app = express()
+const session = require('express-session')
+const usePassport = require('./config/passport')
+
 const methodOverride = require('method-override')
 
 const port = process.env.PORT
 const routes = require('./routes')
+const { use } = require('./routes')
 // require
 require('./config/mongoose')
 
@@ -25,9 +29,14 @@ app.set('view engine', 'handlebars');
 
 
 // app.use，middleware
+app.use(session({
+  secret: 'ExpenseSecret',
+  resave: false,
+  saveUninitialized: true
+}))
 app.use(express.urlencoded({ extended: true }))// post、put會用到，跟資料庫請求、寫入所需要的解析。
 app.use(methodOverride('_method'))
-
+usePassport(app)
 app.use(routes)
 
 
