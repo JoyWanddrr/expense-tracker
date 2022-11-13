@@ -15,8 +15,6 @@ router.get('/', (req, res) => {
       Expense.find({ userId })
         .populate('categoryId')
         .lean()
-        // 依時間排序，最新的在最上面
-        .sort({ date: 'desc' })
         .then(expenses => {
           // 計算總花費
           let totalAmount = 0
@@ -32,21 +30,28 @@ router.get('/sort', (req, res) => {
   const cateSort = req.query.sort
   const userId = req.user._id
   const _id = req.params.id
-  Expense.findById()
+
+  const iconForRender = []
+  Icon.find()
     .lean()
-    .then(cate => {
-      console.log(cate)
-      const filterCategory = cate.filter((data) => {
-        return data.category.includes(cateSort)
-      })
-      if (filterCategory.length === 0) {
-        req.flash('warning_msg', '此類別沒有花費')
-        res.redirect('/')
-      }
-      let totalAmount = 0
-      filterCategory.forEach(cost => { return totalAmount += cost.amount }
-      )
-      res.render('index', { expenses: filterCategory, cateSort, totalAmount })
+    .then(data => iconForRender.push(...data))
+    .then(() => {
+      Expense.find({ userId })
+        .populate('categoryId')
+        .lean()
+        .then(cate => {
+          const filterCategory = cate.filter((data) => {
+            return data.categoryId._id.toString().includes(cateSort.toString())
+          })
+          if (filterCategory.length === 0) {
+            // error({ message: '此類別沒有花費' })
+            res.redirect('/')
+          }
+          let totalAmount = 0
+          filterCategory.forEach(cost => { return totalAmount += cost.amount }
+          )
+          res.render('index', { expenses: filterCategory, iconForRender, totalAmount })
+        })
     })
     .catch(err => console.log(err))
 
