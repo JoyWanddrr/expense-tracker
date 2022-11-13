@@ -1,18 +1,21 @@
 const express = require('express')
 const router = express.Router()
 const Expense = require('../../models/expense')
+const Icon = require('../../models/icons')
 
 
 // 新增
 router.get('/new', (req, res) => {
-  res.render('new')
+  Icon.find()
+    .lean()
+    .then(iconForRender => res.render('new', { iconForRender }))
 })
 
 router.post('/', (req, res) => {
   const userId = req.user._id
   const { name, date, category, amount } = req.body
-  Expense.create({ name, date, category, amount, userId })
-    .then((expense) => {
+  return Expense.create({ name, date, categoryId: category, amount, userId })
+    .then(() => {
       res.redirect('/')
     })
     .catch(err => console.log(err))
@@ -22,19 +25,35 @@ router.post('/', (req, res) => {
 router.get('/:id/edit', (req, res) => {
   const userId = req.user._id
   const _id = req.params.id
-  return Expense.findOne({ _id, userId })
+  const iconForRender = []
+  Icon.find()
     .lean()
-    .then(expense => res.render('edit', { expense })
-    )
-    .catch(err => console.log(err))
+    .then(category => { iconForRender.push(...category) })
+    .then(() => {
+      Expense.findOne({ _id, userId })
+        .lean()
+        //修改時，類別被選取，顯示選取的類別
+        .then(expense => {
+          iconForRender.forEach(icon => {
+            // 假設Expense裡的categoryId與iconForRender裡的相符，則selected。
+            if (expense.categoryId.toString() === icon._id.toString()) {
+              icon.selected = true
+            }
+          })
+          res.render('edit', { expense, iconForRender })
+        })
+        .catch(err => console.log(err))
+    })
 })
 
 router.put('/:id', (req, res) => {
   const userId = req.user._id
   const _id = req.params.id
-  const newExpense = req.body
-  return Expense.findByIdAndUpdate({ _id, userId }, newExpense)
-    .then(() => { return res.redirect('/') })//icon消失，待修
+  const { name, date, category, amount } = req.body
+  return Expense.findByIdAndUpdate({ _id, userId }, {
+    name, date, categoryId: category, amount
+  })
+    .then(() => { return res.redirect('/') })
     .catch(err => console.log(err))
 })
 

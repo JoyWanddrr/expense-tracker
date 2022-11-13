@@ -17,14 +17,11 @@
       </div>
       <div class="m-2">
         <label for="category" style="letter-spacing:1px;margin-right: 20px;">類別*:</label>
-        <select class="drop-down-menu w-50 ms-4" name="category" style="margin: 20px;" required>
-          <option>Select</option>
-          <option>食</option>
-          <option>衣</option>
-          <option>住</option>
-          <option>行</option>
-          <option>樂</option>
-          <option>其他</option>
+        <select class="" name="category" style="margin: 20px;width:150px;height:30px;" required>
+          {{#each iconForRender}}
+          {{!-- 渲染icon進入下拉式選單，將value值變更為categoryId --}}
+          <option value="{{this._id}}">{{this.name}}</option>
+          {{/each}}
         </select>
       </div>
       <div class="m-2">

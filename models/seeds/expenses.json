@@ -1,0 +1,52 @@
+{
+  "results": [
+    {
+      "name": "水電費",
+      "categoryId": "家居物業",
+      "date": "2022-11-01",
+      "amount": 1500
+    },
+    {
+      "name": "公車月票",
+      "categoryId": "交通出行",
+      "date": "2022-10-30",
+      "amount": 500
+    },
+    {
+      "name": "看電影",
+      "categoryId": "休閒娛樂",
+      "date": "2022-11-13",
+      "amount": 250
+    },
+    {
+      "name": "慶生",
+      "categoryId": "休閒娛樂",
+      "date": "2022-11-03",
+      "amount": 999
+    },
+    {
+      "name": "吃晚餐",
+      "categoryId": "餐飲食品",
+      "date": "2022-11-11",
+      "amount": 1111
+    },
+    {
+      "name": "麥當勞",
+      "categoryId": "餐飲食品",
+      "date": "2022-10-11",
+      "amount": 190
+    },
+    {
+      "name": "KFC",
+      "categoryId": "餐飲食品",
+      "date": "2022-10-29",
+      "amount": 599
+    },
+    {
+      "name": "狗飼料",
+      "categoryId": "其他",
+      "date": "2022-11-0",
+      "amount": 1350
+    }
+  ]
+}
