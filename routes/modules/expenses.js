@@ -9,6 +9,7 @@ router.get('/new', (req, res) => {
   Icon.find()
     .lean()
     .then(iconForRender => res.render('new', { iconForRender }))
+
 })
 
 router.post('/', (req, res) => {

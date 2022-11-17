@@ -6,10 +6,10 @@
         <form action="/sort">
           <select class="form-control" name="sort" id="sort" onchange="this.form.submit()"
             style="margin-top:20px;width:250px">
-            <option value="">類別</option>
+            <option value="1">類別</option>
             {{#each iconForRender}}
             {{!-- 渲染icon進入下拉式選單，將value值變更為categoryId --}}
-            <option value="{{this._id}}">{{this.name}}</option>
+            <option value="{{this._id}}" {{#if this.selected}}selected{{/if}}>{{this.name}}</option>
             {{/each}}
           </select>
         </form>
@@ -19,6 +19,9 @@
         <p class="m-4 p-1">您已花費:</p>
         <p class="m-4 fs-1">$ {{totalAmount}} 元</p>
       </div>
+      {{!-- <div>
+        <p class="col m-4 fs-1">{{noCost}}</p>
+      </div> --}}
     </div>
     {{!-- 細項，包含刪除修改 --}}
     <div class="list">
